@@ -1,0 +1,9 @@
+html,body{
+   padding: 40px;
+    background-color: beige;
+}
+
+h1 {
+    font-size: 40px;
+    color: violet;
+}
