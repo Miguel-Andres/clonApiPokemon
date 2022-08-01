@@ -6,7 +6,10 @@ import { ParseMongoIdPipe } from '../common/pipes/parse-mongo-id.pipe';
 
 @Controller('pokemon')
 export class PokemonController {
-  constructor(private readonly pokemonService: PokemonService) {}
+  
+  constructor(
+    private readonly pokemonService: PokemonService
+    ) {}
 
   @Post()
   //se puede cololar el codigo http que quieras 
