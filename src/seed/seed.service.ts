@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import axios, { AxiosInstance } from 'axios';
 import { Model } from 'mongoose';
 import { Pokemon } from 'src/pokemon/entities/pokemon.entity';
-import { PokeResponse } from './interfaces/poke-response.interface';
+import { PokeResponse, SmallPokemon } from './interfaces/poke-response.interface';
 
 
 @Injectable()
@@ -17,17 +17,27 @@ constructor(
 ){}
   
  async executeSeed (){
+    // delete where * from pokemons
+  await this.pokemonModel.deleteMany({})
+
    const {data} =await this.axios.get<PokeResponse>("https://pokeapi.co/api/v2/pokemon?limit=10")
 
-    const cleanData  = data.results.map(async({name,url})=>{
+    
+
+    const dataClean  = data.results.map(({name,url})=>{
       
       const segment  = url.split('/') 
     
-     const pokemon = await this.pokemonModel.create({
-      name,
-      "no" : +segment[segment.length - 2]})
+  return{
+     name,
+    "no" : +segment[segment.length - 2]
+      }
+
+
     })
-   
+  
+    await this.pokemonModel.insertMany(dataClean)
+
    return 'Seed Executed'
   }
 }
