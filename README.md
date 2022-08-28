@@ -18,7 +18,18 @@
     ```
     docker-compose up -d 
     ```
+5. Clonar el archivo ```.env.template ```
 
+6. LLenar las variables de entorno definidas en el .env
+7. 
+
+
+
+8. Reconstruir la base de datos con la semilla 
+
+      ``` 
+      htt://localhost:3000/api/v2/seed
+    ```
     ## Stack
   * MongoDB
   * Nest
